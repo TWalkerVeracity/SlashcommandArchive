@@ -1,0 +1,282 @@
+{
+    "shortcut": {
+        "url": "//tab",
+        "hint": "Special slashcommand, accessible via extension keyboard shortcut",
+        "description": "My preferred keyboard bound slashcommand is the //tab command which just opens a fresh tab. I bind this to ⌥T.",
+        "fields": "",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "w": {
+        "url": "sp_widget_list.do?sysparm_query=nameLIKE$0^ORidLIKE$0^ORDERBYDESCsys_updated_on",
+        "hint": "Widgets <search>",
+        "fields": "name,id",
+        "description": "Search for widgets by name or id.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "stats": {
+        "url": "/stats.do",
+        "hint": "Stats.do",
+        "fields": "undefined",
+        "description": "Open the stats.do page, kinda silly since you can do /stats.do but I like it.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "gr": {
+        "url": "sys_user_group_list.do?sysparm_query=nameCONTAINS$0^ORDERBYDESCsys_updated_on",
+        "hint": "Groups <search>",
+        "fields": "name,description",
+        "description": "Search for groups by name or get to the group table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "mca": {
+        "url": "/$mycompanyappsmgmt.do",
+        "hint": "My Companies Applications",
+        "fields": "undefined",
+        "description": "Open the My Companies Applications page, useful for installing or updating internal apps.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "load": {
+        "url": "upload.do?sysparm_referring_url=sys_remote_update_set_list.do%3Fsysparm_fixed_query%3Dsys_class_name%3Dsys_remote_update_set&sysparm_target=sys_remote_update_set",
+        "hint": "Load an update set",
+        "fields": "undefined",
+        "description": "Opens the load update set page.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "ag": {
+        "url": "/$agile_board.do#/sprint_planning",
+        "hint": "Agile Board",
+        "fields": "undefined",
+        "description": "Opens the Agile Board, about as good as a bookmark, but in a slashcommand.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "sla": {
+        "url": "contract_sla_list.do?sysparm_query=nameLIKE$0^ORDERBYDESCname",
+        "hint": "SLA Definitions <search>",
+        "fields": "name,type",
+        "description": "Search for SLA definitions by name, or get to the SLA table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "r": {
+        "url": "sys_user_role_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+        "hint": "Roles <search>",
+        "fields": "name,description",
+        "description": "Search for roles by name, or get to the role table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "cc": {
+        "url": "cache.do",
+        "hint": "Clear Cache",
+        "fields": "undefined",
+        "description": "Opens the cache.do page, useful for clearing the cache. Use it in conjunction with the /cls command.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "dbt": {
+        "url": "sys_ux_data_broker_transform_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+        "hint": "Data Broker Server Scripts <search>",
+        "fields": "name,description",
+        "description": "Search for Data Broker Server Scripts by name, or get to the Data Broker Server Script table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "aclr": {
+        "url": "sys_security_acl_role_list.do?sysparm_query=sys_user_role.nameLIKE$0^ORDERBYDESCsys_security_acl",
+        "hint": "ACL Roles Relation <search>",
+        "fields": "sys_security_acl,sys_user_role",
+        "description": "Search for ACL Roles Relation by the role name, useful to see which ACLs that a role is affiliated with.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "elog": {
+        "url": "sysevent_list.do?sysparm_query=sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^nameLIKE$0^ORDERBYDESCsys_created_on",
+        "hint": "Event Log <search>",
+        "fields": "sys_created_on,name",
+        "description": "Shows the event log for the day, useful for checking if events have been queued and processed.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "uxem": {
+        "url": "sys_ux_addon_event_mapping_list.do?sysparm_query=parent_macroponent=$sysid",
+        "hint": "UX Add-on Event Mappings for Macroponent",
+        "fields": "sys_updated_on,name",
+        "description": "Shows the UX Add-on Event Mappings for the macroponent, useful for checking if events have been mapped correctly or fixing broken mappings. Intended to be run on a macroponent record.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "alog": {
+        "url": "syslog_app_scope_list.do?sysparm_query=sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^sys_scope=javascript:gs.getPreference(\"apps.current_app\")^ORDERBYDESCsys_created_on",
+        "hint": "App Log for Current Scope",
+        "fields": "sys_created_on,level",
+        "description": "Shows the app log for the current scope for the day, way less cluttered than the general instance log.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "errorlog": {
+        "url": "syslog_list.do?sysparm_query=sys_created_onONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^levelIN2,3^ORDERBYDESCsys_created_on",
+        "hint": "Syslog for today, only errors",
+        "fields": "sys_created_on,level",
+        "description": "Shows the syslog for the day, only showing errors and warnings.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "test": {
+        "url": "//env test",
+        "hint": "Example: Open in Test",
+        "fields": "",
+        "description": "Example slashcommand to open the the current record in the test environment. Double // invokes another command. Replace test with your instance prefix. (test.service-now.com)",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "cmptest": {
+        "url": "//diffenv test",
+        "hint": "Example: Compare to record in Test",
+        "description": "Example slashcommand to open compare the current record with the test environment. Double // invokes another command. Replace test with your instance prefix. (test.service-now.com)",
+        "fields": "",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "nus": {
+        "url": "sys_update_set.do?sys_id=-1",
+        "hint": "New update set",
+        "fields": "",
+        "description": "Opens a new update set record, for your current scope.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "mru": {
+        "url": "sys_update_xml_list.do?sysparm_query=sys_updated_by=javascript:gs.getUserName()^ORDERBYDESCsys_created_on",
+        "hint": "My recent updates",
+        "fields": "sys_created_on,type",
+        "description": "Shows the recent updates you have made, useful for checking your updates have been captured and in which update sets.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "logtail": {
+        "url": "channel.do?sysparm_channel=logtail",
+        "hint": "View Node Logtail",
+        "fields": "undefined",
+        "description": "Opens the logtail channel, useful for tailing the node logs. Can be useful in REST message processing debugging.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "rcr": {
+        "url": "sys_user_role_contains_list.do?sysparm_query=containsLIKE$0^ORDERBYnull",
+        "hint": "Role Contains Roles <search>",
+        "fields": "contains,role",
+        "description": "Search for roles that contain other roles, useful for checking role hierarchies.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "cus": {
+        "url": "sys_update_set.do?sys_id=javascript:gs.getPreference('sys_update_set')",
+        "hint": "Current Update Set",
+        "fields": "undefined",
+        "description": "Opens the current update set, no longer do you need to go through the header.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "nextlog": {
+        "url": "javascript:window.nowUiFramework.setConfigItem(\"loggingEnabled\",!0),window.nowUiFramework.setConfigItem(\"loggingLevels\",[\"error\",\"warn\",\"info\",\"debug\",\"trace\"]);",
+        "hint": "Enable NextExperience Logging",
+        "fields": "",
+        "description": "Enables logging in the NextExperience, useful for debugging. Does the same thing as the DEX extension.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "retrieve": {
+        "url": "sys_update_set_source_list.do?sysparm_query=^ORDERBYname",
+        "hint": "Remote Instances <search>",
+        "fields": "name,type",
+        "description": "Navigate to the remote instances list to retrieve update sets from lower environments.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "sj": {
+        "url": "sysauto_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+        "hint": "Scheduled Jobs <search>",
+        "fields": "name,active",
+        "description": "Search for scheduled jobs by name, or get to the scheduled job table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "event": {
+        "url": "sysevent_register_list.do?sysparm_query=event_nameLIKE$0^ORDERBYnull",
+        "hint": "Event Registry <search>",
+        "fields": "event_name,table",
+        "description": "Search for events by name, or get to the event registry table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "noti": {
+        "url": "sysevent_email_action_list.do?sysparm_query=nameLIKE$0^ORDERBYorder",
+        "hint": "Notifications <search>",
+        "fields": "name,active",
+        "description": "Search for notifications by name, or get to the notification table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "running": {
+        "url": "sys_trigger_list.do?sysparm_query=next_actionONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^state=1^ORDERBYname",
+        "hint": "Running Scheduled Jobs",
+        "fields": "name,next_action",
+        "description": "Shows the scheduled jobs that are currently running, useful for checking on the completion of scheduled jobs.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "ind": {
+        "url": "pa_indicators_list.do?sysparm_query=type=1^nameLIKE$0^ORDERBYorder",
+        "hint": "Indicators <search>",
+        "fields": "name,unit",
+        "description": "Search for PA Indicators by name, or get to the indicator table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "pasc": {
+        "url": "pa_scripts_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+        "hint": "Scripts <search>",
+        "fields": "name,table",
+        "description": "Search for PA Scripts by name, or get to the script table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "roll": {
+        "url": "sys_script_execution_history_list.do?sysparm_query=^ORDERBYnull",
+        "hint": "Script Execution Histories <search>",
+        "fields": "executed_by,script",
+        "description": "Show the most recent script executions, useful for grabbing code you've previously run in background scripts or rolling back runs.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "fix": {
+        "url": "sys_script_fix_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+        "hint": "Fix Scripts <search>",
+        "fields": "name,description",
+        "description": "Search for fix scripts by name, or get to the fix script table quickly.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "myups": {
+        "url": "sys_history_line_list.do?sysparm_query=userDYNAMIC90d1921e5f510100a9ad2572f2b477fe^update_timeONToday@javascript:gs.beginningOfToday()@javascript:gs.endOfToday()^ORDERBYnull",
+        "hint": "Today's History Set Captures",
+        "fields": "label,old",
+        "description": "Shows the history set captures you have made today, useful grabbing historical values from records when they aren't in the activity formatter and you don't have admin/glide.history.role.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "force": {
+        "url": "/sys.scripts.do?scope=global&content=var%20current%20%3D%20new%20GlideRecord%28%22$table%22%29%3B%0Aif%20%28current.get%28%22$sysid%22%29%29%7B%0A%20%20%20%20gs.info%28current.getDisplayValue%28%29%29%3B%0A%20%20%20%20var%20um%20%3D%20new%20GlideUpdateManager2%28%29%3B%0A%20%20%20%20um.saveRecord%28current%29%3B%0A%7D",
+        "hint": "Force current record to current update set",
+        "fields": "",
+        "description": "Opens the script editor with a script that will force the current record to your current update set. Needs to switched to global scope to be run, but will place the update in the current update set.",
+        "order": 0,
+        "overwriteurl": ""
+    }
+}

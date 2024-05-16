@@ -1,0 +1,60 @@
+name: Update README
+
+on:
+  push:
+    paths:
+      - 'slashcommands.json'
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          npm install fs
+          npm install js-yaml
+
+      - name: Update README
+        run: |
+            node -e "
+            const fs = require('fs');
+            const json = JSON.parse(fs.readFileSync('slashcommands.json', 'utf8'));
+
+            // Build the wiki content
+            let wikiContent = '\n## Wiki\n\n';
+            for (const key in json) {
+              let command = '/' + key;
+              let hint = json[key]?.hint?.replace(/</g, '&lt;')?.replace(/>/g, '&gt;');
+              let description = json[key]?.description?.replace(/</g, '&lt;')?.replace(/>/g, '&gt;');
+              wikiContent += '### ' + command + '\n\n';
+              wikiContent += '*' + hint + '*\n\n';
+              wikiContent += description + '\n\n';
+                wikiContent += '<pre><code>' + json[key]?.url + '</code></pre>\n\n';
+              wikiContent += '---\n\n';
+            }
+            const readme = fs.readFileSync('README.md', 'utf8');
+
+            // Replace the wiki content in the README
+            const start = readme.indexOf('## Wiki');
+            const newReadme = readme.substring(0, start) + wikiContent;
+
+            fs.writeFileSync('README.md', newReadme);
+            "
+
+      - name: Commit and push if it changed
+        run: |
+          git diff
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git commit -am "Update README with wiki content" || exit 0
+          git push
