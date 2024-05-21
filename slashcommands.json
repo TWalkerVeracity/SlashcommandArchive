@@ -279,4 +279,12 @@
         "order": 0,
         "overwriteurl": ""
     }
+    "csmrec": {
+        "url": "/now/cwf/agent/record/$table/$sysid/params/selected-tab-index/0",
+        "hint": "Opens the current record in CSM Workspace",
+        "fields": "",
+        "description": "Opens the current record in CSM workspace, super useful when you want to look at a record found using sys_id search or found in platform",
+        "order": 0,
+        "overwriteurl": ""
+    }
 }
