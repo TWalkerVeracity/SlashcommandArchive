@@ -278,7 +278,7 @@
         "description": "Opens the script editor with a script that will force the current record to your current update set. Needs to switched to global scope to be run, but will place the update in the current update set.",
         "order": 0,
         "overwriteurl": ""
-    }
+    },
     "csmrec": {
         "url": "/now/cwf/agent/record/$table/$sysid/params/selected-tab-index/0",
         "hint": "Opens the current record in CSM Workspace",
