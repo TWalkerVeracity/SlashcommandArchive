@@ -6,6 +6,7 @@
 
 
 
+
 ## Wiki
 
 ### /shortcut
@@ -355,6 +356,16 @@ Shows the history set captures you have made today, useful grabbing historical v
 Opens the script editor with a script that will force the current record to your current update set. Needs to switched to global scope to be run, but will place the update in the current update set.
 
 <pre><code>/sys.scripts.do?scope=global&content=var%20current%20%3D%20new%20GlideRecord%28%22$table%22%29%3B%0Aif%20%28current.get%28%22$sysid%22%29%29%7B%0A%20%20%20%20gs.info%28current.getDisplayValue%28%29%29%3B%0A%20%20%20%20var%20um%20%3D%20new%20GlideUpdateManager2%28%29%3B%0A%20%20%20%20um.saveRecord%28current%29%3B%0A%7D</code></pre>
+
+---
+
+### /csmrec
+
+*Opens the current record in CSM Workspace*
+
+Opens the current record in CSM workspace, super useful when you want to look at a record found using sys_id search or found in platform
+
+<pre><code>/now/cwf/agent/record/$table/$sysid/params/selected-tab-index/0</code></pre>
 
 ---
 
