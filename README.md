@@ -8,6 +8,7 @@
 
 
 
+
 ## Wiki
 
 ### /shortcut
@@ -370,7 +371,7 @@ Opens the current record in CSM workspace, super useful when you want to look at
 
 ---
 
-### /custz
+### /czn
 
 *Filters current table to only show records that have customer updates.*
 
