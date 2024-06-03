@@ -287,7 +287,7 @@
         "order": 0,
         "overwriteurl": ""
     },
-    "custz": {
+    "czn": {
         "url": "/$table_list.do?sysparm_query=^JOIN$table.sys_update_name=sys_update_version.name!source_table!=sys_store_app",
         "hint": "Filters current table to only show records that have customer updates.",
         "fields": "",
