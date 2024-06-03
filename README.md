@@ -7,6 +7,7 @@
 
 
 
+
 ## Wiki
 
 ### /shortcut
@@ -366,6 +367,16 @@ Opens the script editor with a script that will force the current record to your
 Opens the current record in CSM workspace, super useful when you want to look at a record found using sys_id search or found in platform
 
 <pre><code>/now/cwf/agent/record/$table/$sysid/params/selected-tab-index/0</code></pre>
+
+---
+
+### /custz
+
+*Filters current table to only show records that have customer updates.*
+
+Uses a join query to filter the current table to only show records that have customer updates. I would love to make this a switch but the current implementation doesn't support it.
+
+<pre><code>/$table_list.do?sysparm_query=^JOIN$table.sys_update_name=sys_update_version.name!source_table!=sys_store_app</code></pre>
 
 ---
 
