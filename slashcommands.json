@@ -287,6 +287,14 @@
         "order": 0,
         "overwriteurl": ""
     },
+    "awrec": {
+		"url": "/now/workspace/agent/record/$table/$sysid/params/selected-tab-index/0",
+		"hint": "Opens the current record in AW Workspace",
+		"fields": "",
+        "description": "Opens the current record in AW Workspace, super useful when you want to look at a record found using sys_id search or found in platform",
+		"order": 0,
+		"overwriteurl": ""
+	},
     "czn": {
         "url": "/$table_list.do?sysparm_query=^JOIN$table.sys_update_name=sys_update_version.name!source_table!=sys_store_app",
         "hint": "Filters current table to only show records that have customer updates.",
@@ -294,5 +302,37 @@
         "description": "Uses a join query to filter the current table to only show records that have customer updates. I would love to make this a switch but the current implementation doesn't support it.",
         "order": 0,
         "overwriteurl": ""
-    }
+    },
+    "ff": {
+		"url": "sys_ui_element_list.do?sysparm_query=elementSTARTSWITH$0^ORDERBYDESCelement",
+		"hint": "Field Find <search>",
+		"fields": "sys_ui_section,sys_ui_section.name",
+        "description": "Search for UI elements by name, useful for finding which views a field is on.",
+		"order": 0,
+		"overwriteurl": ""
+	},
+    "us": {
+		"url": "sys_update_set_list.do?sysparm_query=^ORDERBYDESCsys_created_on",
+		"hint": "Update Sets <search>",
+		"fields": "name,application",
+        "description": "Search for update sets by name or get to the update set table quickly.",
+		"order": 0,
+		"overwriteurl": ""
+	},    
+    "ms": {
+		"url": "sys_script_email_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+		"hint": "Email Scripts <search>",
+		"fields": "name,new_lines_to_html",
+        "description": "Search for email scripts by name or get to the email script table quickly.",
+		"order": 0,
+		"overwriteurl": ""
+	},
+	"ts": {
+		"url": "sn_doc_template_script_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
+		"hint": "Document Template Scripts <search>",
+		"fields": "name,script",
+        "description": "Search for document template scripts by name or get to the document template script table quickly.",
+		"order": 50,
+		"overwriteurl": ""
+	}
 }
