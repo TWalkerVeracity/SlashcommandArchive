@@ -9,6 +9,7 @@
 
 
 
+
 ## Wiki
 
 ### /shortcut
@@ -371,6 +372,16 @@ Opens the current record in CSM workspace, super useful when you want to look at
 
 ---
 
+### /awrec
+
+*Opens the current record in AW Workspace*
+
+Opens the current record in AW Workspace, super useful when you want to look at a record found using sys_id search or found in platform
+
+<pre><code>/now/workspace/agent/record/$table/$sysid/params/selected-tab-index/0</code></pre>
+
+---
+
 ### /czn
 
 *Filters current table to only show records that have customer updates.*
@@ -378,6 +389,46 @@ Opens the current record in CSM workspace, super useful when you want to look at
 Uses a join query to filter the current table to only show records that have customer updates. I would love to make this a switch but the current implementation doesn't support it.
 
 <pre><code>/$table_list.do?sysparm_query=^JOIN$table.sys_update_name=sys_update_version.name!source_table!=sys_store_app</code></pre>
+
+---
+
+### /ff
+
+*Field Find &lt;search&gt;*
+
+Search for UI elements by name, useful for finding which views a field is on.
+
+<pre><code>sys_ui_element_list.do?sysparm_query=elementSTARTSWITH$0^ORDERBYDESCelement</code></pre>
+
+---
+
+### /us
+
+*Update Sets &lt;search&gt;*
+
+Search for update sets by name or get to the update set table quickly.
+
+<pre><code>sys_update_set_list.do?sysparm_query=^ORDERBYDESCsys_created_on</code></pre>
+
+---
+
+### /ms
+
+*Email Scripts &lt;search&gt;*
+
+Search for email scripts by name or get to the email script table quickly.
+
+<pre><code>sys_script_email_list.do?sysparm_query=nameLIKE$0^ORDERBYname</code></pre>
+
+---
+
+### /ts
+
+*Document Template Scripts &lt;search&gt;*
+
+Search for document template scripts by name or get to the document template script table quickly.
+
+<pre><code>sn_doc_template_script_list.do?sysparm_query=nameLIKE$0^ORDERBYname</code></pre>
 
 ---
 
