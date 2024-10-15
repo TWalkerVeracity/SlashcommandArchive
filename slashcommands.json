@@ -318,7 +318,7 @@
         "description": "Search for update sets by name or get to the update set table quickly.",
 		"order": 0,
 		"overwriteurl": ""
-	},    
+    },
     "ms": {
 		"url": "sys_script_email_list.do?sysparm_query=nameLIKE$0^ORDERBYname",
 		"hint": "Email Scripts <search>",
@@ -334,5 +334,44 @@
         "description": "Search for document template scripts by name or get to the document template script table quickly.",
 		"order": 50,
 		"overwriteurl": ""
+    },
+    "upa": {
+        "url": "sys_ui_policy_action_list.do?sysparm_query=fieldLIKE$0^ORDERBYfield",
+        "hint": "UI Policy Actions <search>",
+        "fields": "table,field",
+        "description": "Search for UI policy actions by field, really useful for checking what is showing/hiding a field.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "resume": {
+        "url": "[resumeUpdateSet.js](resumeUpdateSet.js)",
+        "hint": "Resume the most recent update set for record",
+        "fields": "",
+        "description": "Resumes the most recent update set for the current record. Will prompt you if you want to resume the update set if it is not in progress.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "sact": {
+        "url": "sysevent_script_action_list.do?sysparm_query=event_nameLIKE$0^ORDERBYorder^ORDERBYorder",
+        "hint": "Script Actions <search>",
+        "fields": "name,event_name",
+        "description": "Search for script actions by event name, useful for finding what scripts are running on an event.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "vtb": {
+        "url": "/$vtb.do",
+        "hint": "Visual Task Boards",
+        "fields": "undefined",
+        "description": "Opens the Visual Task Boards page.",
+        "order": 0,
+        "overwriteurl": ""
+    },
+    "forcepop": {
+        "url": "[forcePop.js](forcePop.js)",
+        "hint": "Force the always show nav user preference.",
+        "fields": "",
+        "order": 0,
+        "overwriteurl": ""
 	}
 }
