@@ -10,6 +10,7 @@
 
 
 
+
 ## Wiki
 
 ### /shortcut
@@ -429,6 +430,56 @@ Search for email scripts by name or get to the email script table quickly.
 Search for document template scripts by name or get to the document template script table quickly.
 
 <pre><code>sn_doc_template_script_list.do?sysparm_query=nameLIKE$0^ORDERBYname</code></pre>
+
+---
+
+### /upa
+
+*UI Policy Actions &lt;search&gt;*
+
+Search for UI policy actions by field, really useful for checking what is showing/hiding a field.
+
+<pre><code>sys_ui_policy_action_list.do?sysparm_query=fieldLIKE$0^ORDERBYfield</code></pre>
+
+---
+
+### /resume
+
+*Resume the most recent update set for record*
+
+Resumes the most recent update set for the current record. Will prompt you if you want to resume the update set if it is not in progress.
+
+<pre><code>[resumeUpdateSet.js](resumeUpdateSet.js)</code></pre>
+
+---
+
+### /sact
+
+*Script Actions &lt;search&gt;*
+
+Search for script actions by event name, useful for finding what scripts are running on an event.
+
+<pre><code>sysevent_script_action_list.do?sysparm_query=event_nameLIKE$0^ORDERBYorder^ORDERBYorder</code></pre>
+
+---
+
+### /vtb
+
+*Visual Task Boards*
+
+Opens the Visual Task Boards page.
+
+<pre><code>/$vtb.do</code></pre>
+
+---
+
+### /forcepop
+
+*Force the always show nav user preference.*
+
+undefined
+
+<pre><code>[forcePop.js](forcePop.js)</code></pre>
 
 ---
 
