@@ -344,7 +344,8 @@
         "overwriteurl": ""
     },
     "resume": {
-        "url": "[resumeUpdateSet.js](resumeUpdateSet.js)",
+        "url": "javascript: g_form?resumeUpdateSet(g_form.getTableName(),g_form.getUniqueValue()):snuSlashCommandInfoText(\"This command can only be used on a form view.\",!1);\nfunction resumeUpdateSet(c,b){c&&b?(snuSlashCommandShow(\"/resume\",!1),fetch(\"/api/now/table/sys_update_version?\"+new URLSearchParams({sysparm_query:`name=${`${c}_${b}`}^state=current^source_table=sys_update_set`,sysparm_fields:\"source,source_table,source.state,source.name,source.sys_id,sys_id\",sysparm_limit:1}),{method:\"GET\",headers:{Accept:\"application/json\",\"Content-Type\":\"application/json\",\"X-UserToken\":g_ck}}).then(a=>a.json()).then(a=>{a.result[0]?a.result[0]&&\"in progress\"===a.result[0][\"source.state\"]?\nsnuSwitchUpdateSet(a.result[0][\"source.sys_id\"]):snuSlashCommandConfirm(\"The update set is not in progress. Do you want to resume it?\",()=>{setUpdateSetToInProgress(a.result[0][\"source.sys_id\"])},()=>{snuSlashCommandInfoText(\"Update set not resumed.\",!1)}):snuSlashCommandInfoText(\"No local update set found for current version of record.\",!1)})):snuSlashCommandInfoText(\"Table and sys_id not found.\",!1)}\nfunction setUpdateSetToInProgress(c){fetch(`/api/now/table/sys_update_set/${c}`,{method:\"PATCH\",headers:{Accept:\"application/json, text/plain, */*\",\"Content-Type\":\"application/json;charset=UTF-8\",\"X-UserToken\":g_ck},body:JSON.stringify({state:\"in progress\"})}).then(b=>b.json()).then(b=>{b?.error?snuSlashCommandInfoText(\"Error setting update set to in progress:\"+b.error.detail,!1):snuSwitchUpdateSet(c)}).catch(b=>{snuSlashCommandInfoText(\"Error setting update set to in progress:\",b,!1)})}\nfunction snuSlashCommandConfirm(c,b,a){window.top.document.getElementById(\"snudirectlinks\").innerHTML=`\n        <div>${c}</div>\n        <span class=\"dispidx\">1</span><a id=\"snulnk1\"> Yes</a><br/>\n        <span class=\"dispidx\">2</span><a id=\"snulnk2\"> No</a><br/>\n    `;window.top.document.querySelectorAll(\"#snudirectlinks a\").forEach(d=>{d.addEventListener(\"click\",e=>{\"snulnk1\"===e.target.id?b():a()})})}\nfunction snuSwitchUpdateSet(c){Object.keys(localStorage).filter(a=>a.includes(\".available\")).forEach(a=>{localStorage.removeItem(a)});let b={};b.sysId=c;c={Accept:\"application/json, text/plain, */*\",\"Content-Type\":\"application/json;charset=UTF-8\",\"X-WantSessionNotificationMessages\":!1};g_ck&&(c[\"X-UserToken\"]=g_ck);fetch(\"/api/now/ui/concoursepicker/updateset\",{method:\"PUT\",headers:c,body:JSON.stringify(b)}).then(a=>a.json()).then(a=>{a?.error?snuSlashCommandInfoText(\"Error switching:\"+a.error.detail,\n!1):(localStorage.setItem(\"snuPickerUpdated\",(new Date).getTime()),snuSlashCommandInfoText(\"Reloading page...\",!1),setTimeout(()=>{window.top.location.reload()},1600))}).catch(a=>{snuSlashCommandInfoText(\"Error switching:\",a,!1)})};",
+        "script": "resumeUpdateSet.js",
         "hint": "Resume the most recent update set for record",
         "fields": "",
         "description": "Resumes the most recent update set for the current record. Will prompt you if you want to resume the update set if it is not in progress.",
@@ -358,7 +359,7 @@
         "description": "Search for script actions by event name, useful for finding what scripts are running on an event.",
         "order": 0,
         "overwriteurl": ""
-    },
+        },
     "vtb": {
         "url": "/$vtb.do",
         "hint": "Visual Task Boards",
@@ -368,8 +369,10 @@
         "overwriteurl": ""
     },
     "forcepop": {
-        "url": "[forcePop.js](forcePop.js)",
+        "url": "javascript: (function(){function f(b){this.params={};this.addParam(\"sysparm_processor\",b)}function g(b,a){return new Promise((c,d)=>{var e=new f(\"UserPreference\");e.addParam(\"sysparm_type\",\"set\");e.addParam(\"sysparm_name\",b);e.addParam(\"sysparm_value\",a);e.getXML(function(h){200===h.status?c({name:b,value:a}):d(Error(`Failed to set preference: ${b}`))})})}var k={\"glide.ui.polaris.ui16_tabs_inside_polaris\":\"true\"};f.prototype.addParam=function(b,a){this.params[b]=a};f.prototype.getXML=function(b){var a=\nnew XMLHttpRequest;a.open(\"POST\",\"xmlhttp.do\",!0);a.setRequestHeader(\"Content-Type\",\"application/x-www-form-urlencoded\");a.setRequestHeader(\"X-UserToken\",window.g_ck);a.onload=function(){b(a)};var c=Object.keys(this.params).map(function(d){return encodeURIComponent(d)+\"=\"+encodeURIComponent(this.params[d])},this).join(\"&\");a.send(c)};\"undefined\"===typeof window.g_ck?snuSlashCommandInfoText(\"Security token not found. Make sure you're logged in to ServiceNow.\",!1):async function(){for(const [b,a]of Object.entries(k))try{await g(b,\na),snuSlashCommandInfoText(`Preference set: ${b} = ${a}\\n`,!0)}catch(c){snuSlashCommandInfoText(`Error setting preference ${b}: ${c.message}\\n`,!0)}}()})();",
         "hint": "Force the always show nav user preference.",
+        "description": "Forces the always show nav user preference to be true. Useful for always showing the nav bar in the new UI. Script can be used to set any user preference.",
+        "script": "forcePop.js",
         "fields": "",
         "order": 0,
         "overwriteurl": ""

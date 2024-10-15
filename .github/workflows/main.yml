@@ -29,25 +29,34 @@ jobs:
             node -e "
             const fs = require('fs');
             const json = JSON.parse(fs.readFileSync('slashcommands.json', 'utf8'));
-
+      
             // Build the wiki content
             let wikiContent = '\n## Wiki\n\n';
             for (const key in json) {
               let command = '/' + key;
-              let hint = json[key]?.hint?.replace(/</g, '&lt;')?.replace(/>/g, '&gt;');
-              let description = json[key]?.description?.replace(/</g, '&lt;')?.replace(/>/g, '&gt;');
+              let hint = json[key]?.hint || '';
+              let description = json[key]?.description || '';
+              let url = json[key]?.url || '';
+              let script = json[key]?.script || '';
+      
+              hint = hint.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+              description = description.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      
               wikiContent += '### ' + command + '\n\n';
-              wikiContent += '*' + hint + '*\n\n';
-              wikiContent += description + '\n\n';
-                wikiContent += '<pre><code>' + json[key]?.url + '</code></pre>\n\n';
+              
+              if (hint) wikiContent += '*' + hint + '*\n\n';
+              if (description) wikiContent += description + '\n\n';
+              if (url) wikiContent += '<pre><code>' + url + '</code></pre>\n\n';
+              if (script) wikiContent += 'Script: [' + script + '](' + script + ')\n\n';
+              
               wikiContent += '---\n\n';
             }
             const readme = fs.readFileSync('README.md', 'utf8');
-
+      
             // Replace the wiki content in the README
             const start = readme.indexOf('## Wiki');
             const newReadme = readme.substring(0, start) + wikiContent;
-
+      
             fs.writeFileSync('README.md', newReadme);
             "
 
