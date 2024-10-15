@@ -1,5 +1,5 @@
 # Slashcommand Archive
-  This repo serves as my personal archive of slashcommand that I can't live without since I'm often switching client remote desktops and laptops and wanted a easy place to go to import them all at once. There is a [slashcommands.json](https://github.com/TWalkerVeracity/SlashcommandArchive/blob/4f8c2d8ceb0745a7876286590b96e964b2fcb806/slashcommands.json) file that you can use to import the commands in bulk, and I've written a quick GitHub action to list them out one by one below so they can be grabbed a la cart. 
+  This repo serves as my personal archive of slashcommand that I can't live without since I'm often switching client remote desktops and laptops and wanted a easy place to go to import them all at once. There is a [slashcommands.json](slashcommands.json) file that you can use to import the commands in bulk, and I've written a quick GitHub action to list them out one by one below so they can be grabbed a la cart. 
 
 
 
