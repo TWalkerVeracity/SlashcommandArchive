@@ -1,8 +1,18 @@
 /**
- * This javascript will need to be minified to be used as a bookmarklet or in a slashcommand. 
- * I try to write my bookmarklets to be readable and executable, but this one is complex enough that minifying is necessary. 
- * A minified version is available in the exportUpdateSet.min.js file, but you can minify this source directly so you can review it prior to running.
+ * Export Update Sets (EUS) Bookmarklet
+ * 
+ * This bookmarklet exports update sets from a ServiceNow list view.
+ * Simplified version without the complex UI - uses basic prompts and automatic downloads.
+ * 
+ * To use:
+ * 1. Create a new bookmark in your browser
+ * 2. Copy the minified code below (starting with javascript:)
+ * 3. Paste it as the URL/location of the bookmark
+ * 4. When viewing an update set list, click the bookmark to export them
  */
+
+// Original code (readable):
+javascript:
 (async function () {
 
     // ============================================================================
@@ -31,8 +41,8 @@
                     background: white;
                     border-radius: 8px;
                     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-                    max-width: 600px;
-                    width: 90%;
+                    width: 70vw;
+                    max-width: 1200px;
                     max-height: 80vh;
                     display: flex;
                     flex-direction: column;
@@ -333,7 +343,9 @@
     }
 
     function isBatchBase(set) {
-        return set.base_update_set?.value === set.sys_id;
+        // Handle both plain sys_id strings and objects with .value property
+        const sysIdValue = typeof set.sys_id === 'string' ? set.sys_id : set.sys_id?.value;
+        return set.base_update_set?.value === sysIdValue;
     }
 
     function formatFilename(name) {
@@ -405,21 +417,21 @@
             const includedBaseSets = {};
             const inheritedBaseSets = {};
 
-            // Standalone sets are not batched
+            // Standalone sets are those that are not batched and found in the filter
             updateSetResults
-                .filter(set => !isInBatch(set) || isBatchBase({ ...set, sys_id: set.sys_id }))
+                .filter(set => !isInBatch(set))
                 .forEach(set => {
                     standaloneSets[set.sys_id] = set;
                 });
 
-            // Included base sets are batch bases in the filter results
+            // Included base sets are those that are batch bases and are included in the filter
             baseUpdateSetResults
                 .filter(set => updateSetResults.some(s => s.sys_id === set.base_update_set?.value))
                 .forEach(set => {
                     includedBaseSets[set.sys_id] = set;
                 });
 
-            // Inherited base sets are batch bases NOT in the filter
+            // Inherited base sets are those that are batch bases and are not included in the filter
             baseUpdateSetResults
                 .filter(set => !includedBaseSets[set.sys_id])
                 .forEach(set => {
@@ -487,6 +499,7 @@
       return { success: false, error: "Update set not found." };
     
     var updateSetExport = new UpdateSetExport();
+    updateSetExport.onlyIncludeCompletedChildren = false;
     var stagedUpdateSet = updateSetExport.${isBatchBase ? 'exportHierarchy' : 'exportUpdateSet'}(updateSetGr);
     
     return { success: true, staged_set: stagedUpdateSet };
@@ -571,7 +584,7 @@
         }
     }
 
-    async function processUpdateSets(sets, startIndex, total, categoryName) {
+    async function processUpdateSets(sets, startIndex, total, categoryName, shouldContinue) {
         let successCount = 0;
         let failCount = 0;
         let currentIndex = startIndex;
@@ -581,6 +594,12 @@
             console.log(`\nExporting ${count} ${categoryName}...`);
 
             for (const [sysId] of Object.entries(sets)) {
+                // Check if we should stop
+                if (!shouldContinue()) {
+                    console.log('Export stopped by user');
+                    break;
+                }
+
                 currentIndex++;
                 updateItemStatus(sysId, 'processing');
                 const success = await exportUpdateSet(sysId, currentIndex, total);
@@ -661,33 +680,39 @@
                 let totalFail = 0;
                 let currentIndex = 0;
 
+                // Function to check if export should continue
+                const shouldContinue = () => isExporting;
+
                 // Process each category
-                if (isExporting) {
-                    const standalone = await processUpdateSets(standaloneSets, currentIndex, totalCount, 'standalone update set(s)');
-                    totalSuccess += standalone.successCount;
-                    totalFail += standalone.failCount;
-                    currentIndex = standalone.currentIndex;
-                }
+                const standalone = await processUpdateSets(standaloneSets, currentIndex, totalCount, 'standalone update set(s)', shouldContinue);
+                totalSuccess += standalone.successCount;
+                totalFail += standalone.failCount;
+                currentIndex = standalone.currentIndex;
 
                 if (isExporting) {
-                    const included = await processUpdateSets(includedBaseSets, currentIndex, totalCount, 'batch update set(s) (base in filter)');
+                    const included = await processUpdateSets(includedBaseSets, currentIndex, totalCount, 'batch update set(s) (base in filter)', shouldContinue);
                     totalSuccess += included.successCount;
                     totalFail += included.failCount;
                     currentIndex = included.currentIndex;
                 }
 
                 if (isExporting) {
-                    const inherited = await processUpdateSets(inheritedBaseSets, currentIndex, totalCount, 'inherited batch(es) (children in filter)');
+                    const inherited = await processUpdateSets(inheritedBaseSets, currentIndex, totalCount, 'inherited batch(es) (children in filter)', shouldContinue);
                     totalSuccess += inherited.successCount;
                     totalFail += inherited.failCount;
                 }
 
-                console.log(`\nExport complete! Success: ${totalSuccess}, Failed: ${totalFail}`);
+                if (isExporting) {
+                    console.log(`\nExport complete! Success: ${totalSuccess}, Failed: ${totalFail}`);
+                } else {
+                    console.log(`\nExport stopped. Success: ${totalSuccess}, Failed: ${totalFail}`);
+                }
 
-                // Update button to show completion
+                // Update buttons based on completion status
                 if (startBtn) {
-                    startBtn.textContent = 'Export Complete';
+                    startBtn.textContent = isExporting ? 'Export Complete' : 'Export Stopped';
                     startBtn.disabled = false;
+                    startBtn.onclick = closeModal;
                 }
                 if (cancelBtn) {
                     cancelBtn.textContent = 'Close';
@@ -699,6 +724,12 @@
                 if (startBtn) {
                     startBtn.textContent = 'Export Failed';
                     startBtn.disabled = false;
+                    startBtn.onclick = closeModal;
+                }
+                if (cancelBtn) {
+                    cancelBtn.textContent = 'Close';
+                    cancelBtn.className = 'eus-btn eus-btn-secondary';
+                    cancelBtn.onclick = closeModal;
                 }
             } finally {
                 isExporting = false;
